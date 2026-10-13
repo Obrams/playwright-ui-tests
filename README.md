@@ -1,75 +1,75 @@
-# UI Автотесты для SauceDemo
+# UI Autotests for SauceDemo
 
-Полноценный фреймворк UI автотестов на Playwright с использованием паттерна Page Object на Python для тестирования сайта [saucedemo.com](https://www.saucedemo.com/).
+A full-featured UI test automation framework in Python using Playwright and the Page Object pattern for testing [saucedemo.com](https://www.saucedemo.com/).
 
-## Содержание
+## Contents
 
-- [Описание](#описание)
-- [Структура проекта](#структура-проекта)
-- [Требования](#требования)
-- [Установка](#установка)
-- [Запуск тестов](#запуск-тестов)
-- [Отчеты](#отчеты)
-- [Маркеры тестов](#маркеры-тестов)
-- [Тестовые сценарии](#тестовые-сценарии)
+- [Description](#description)
+- [Project structure](#project-structure)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Running tests](#running-tests)
+- [Reports](#reports)
+- [Test markers](#test-markers)
+- [Test scenarios](#test-scenarios)
 
-## Описание
+## Description
 
-Проект представляет собой набор автоматизированных UI тестов для интернет-магазина SauceDemo. Тесты написаны с использованием:
+The project is a set of automated UI tests for the SauceDemo online store. The tests use:
 
-- **Playwright** - современный фреймворк для автоматизации браузеров
-- **Pytest** - мощный фреймворк для тестирования на Python
-- **pytest-xdist** - параллельное выполнение тестов для максимальной скорости
-- **Page Object Pattern** - паттерн проектирования для структурирования кода тестов
-- **Allure/HTML Reports** - для генерации красивых отчетов
+- **Playwright** - a modern browser automation framework
+- **Pytest** - a powerful Python testing framework
+- **pytest-xdist** - parallel test execution for maximum speed
+- **Page Object Pattern** - a design pattern for structuring test code
+- **Allure/HTML Reports** - for generating rich reports
 
-## Структура проекта
+## Project structure
 
 ```
 playwrite_ui_test/
-├── pages/                    # Page Object классы
+├── pages/                    # Page Object classes
 │   ├── __init__.py
-│   ├── base_page.py         # Базовый класс для всех страниц
-│   ├── login_page.py        # Страница авторизации
-│   ├── inventory_page.py    # Страница каталога товаров
-│   ├── cart_page.py         # Страница корзины
-│   ├── checkout_page.py     # Страница оформления заказа
-│   └── checkout_complete_page.py  # Страница завершения заказа
-├── tests/                    # Тестовые сценарии
+│   ├── base_page.py         # Base class for all pages
+│   ├── login_page.py        # Login page
+│   ├── inventory_page.py    # Product catalog page
+│   ├── cart_page.py         # Cart page
+│   ├── checkout_page.py     # Checkout page
+│   └── checkout_complete_page.py  # Order complete page
+├── tests/                    # Test scenarios
 │   ├── __init__.py
-│   ├── conftest.py          # Pytest фикстуры и конфигурация
-│   ├── test_login.py        # Тесты авторизации (6 тестов)
-│   ├── test_inventory.py    # Тесты каталога товаров (10 тестов)
-│   ├── test_cart.py         # Тесты корзины (8 тестов)
-│   └── test_checkout.py     # Тесты оформления заказа (9 тестов)
-├── utils/                    # Вспомогательные утилиты
+│   ├── conftest.py          # Pytest fixtures and configuration
+│   ├── test_login.py        # Login tests (6 tests)
+│   ├── test_inventory.py    # Product catalog tests (10 tests)
+│   ├── test_cart.py         # Cart tests (8 tests)
+│   └── test_checkout.py     # Checkout tests (9 tests)
+├── utils/                    # Helper utilities
 │   ├── __init__.py
-│   └── test_data.py         # Тестовые данные
-├── screenshots/              # Скриншоты при падении тестов (создается автоматически)
-├── allure-results/           # Результаты для Allure отчета (создается автоматически)
-├── allure-report/            # Готовый Allure отчет (создается при генерации)
-├── pytest.ini               # Конфигурация pytest
-├── requirements.txt         # Зависимости проекта
-└── README.md                # Документация
+│   └── test_data.py         # Test data
+├── screenshots/              # Screenshots on test failure (created automatically)
+├── allure-results/           # Allure results (created automatically)
+├── allure-report/            # Generated Allure report
+├── pytest.ini               # pytest configuration
+├── requirements.txt         # Project dependencies
+└── README.md                # Documentation
 
 ```
 
-## Требования
+## Requirements
 
-- Python 3.8 или выше
-- pip (менеджер пакетов Python)
-- Git (опционально)
+- Python 3.8 or higher
+- pip (Python package manager)
+- Git (optional)
 
-## Установка
+## Installation
 
-### 1. Клонирование репозитория (если используется Git)
+### 1. Clone the repository (if using Git)
 
 ```bash
-git clone <url-репозитория>
+git clone <repository-url>
 cd playwrite_ui_test
 ```
 
-### 2. Создание виртуального окружения (рекомендуется)
+### 2. Create a virtual environment (recommended)
 
 **Windows:**
 ```bash
@@ -83,171 +83,171 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Установка зависимостей
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Установка браузеров для Playwright
+### 4. Install Playwright browsers
 
 ```bash
 playwright install
 ```
 
-Или для установки только Chromium:
+Or install Chromium only:
 ```bash
 playwright install chromium
 ```
 
-## Запуск тестов
+## Running tests
 
-### Базовые команды
+### Basic commands
 
-**Запуск всех тестов:**
+**Run all tests:**
 ```bash
 pytest
 ```
 
-**Запуск с отображением print-ов:**
+**Run with print output:**
 ```bash
 pytest -s
 ```
 
-**Запуск в headed режиме (с отображением браузера):**
+**Run in headed mode (with a visible browser):**
 ```bash
 pytest --headed
 ```
 
-**Запуск с замедлением (для наблюдения за процессом):**
+**Run with slow-mo (to watch the process):**
 ```bash
 pytest --headed --slowmo=1000
 ```
 
-### Запуск по маркерам
+### Run by markers
 
-**Запуск только smoke тестов:**
+**Run smoke tests only:**
 ```bash
 pytest -m smoke
 ```
 
-**Запуск только тестов авторизации:**
+**Run login tests only:**
 ```bash
 pytest -m login
 ```
 
-**Запуск regression тестов:**
+**Run regression tests:**
 ```bash
 pytest -m regression
 ```
 
-**Запуск тестов корзины и checkout:**
+**Run cart and checkout tests:**
 ```bash
 pytest -m "cart or checkout"
 ```
 
-### Запуск конкретных файлов или тестов
+### Run specific files or tests
 
-**Запуск конкретного файла:**
+**Run a specific file:**
 ```bash
 pytest tests/test_login.py
 ```
 
-**Запуск конкретного теста:**
+**Run a specific test:**
 ```bash
 pytest tests/test_login.py::TestLogin::test_successful_login
 ```
 
-**Запуск конкретного класса тестов:**
+**Run a specific test class:**
 ```bash
 pytest tests/test_login.py::TestLogin
 ```
 
-### 🚀 Параллельный запуск (РЕКОМЕНДУЕТСЯ для 35 тестов)
+### 🚀 Parallel run (RECOMMENDED for 35 tests)
 
-> **Важно:** Для 35 тестов параллельное выполнение **значительно ускоряет** тестирование (в 4-5 раз быстрее)!
+> **Important:** for 35 tests, parallel execution **significantly speeds up** the run (4–5x faster)!
 
-**Запуск всех тестов параллельно (авто-определение потоков):**
+**Run all tests in parallel (auto-detect workers):**
 ```bash
 pytest -n auto
 ```
 
-**Запуск с указанным количеством потоков:**
+**Run with a given number of workers:**
 ```bash
-pytest -n 8                      # Использовать 8 потоков
-pytest -n 4 -m smoke            # 4 потока, только smoke тесты
+pytest -n 8                      # Use 8 workers
+pytest -n 4 -m smoke            # 4 workers, smoke tests only
 ```
 
-**Быстрый headless запуск (без GUI, идеально для CI/CD):**
+**Fast headless run (no GUI, ideal for CI/CD):**
 ```bash
-pytest -n auto --headed=false                    # Максимальная скорость
-pytest -n 6 --headed=false                       # 6 потоков headless
-pytest -n auto --headed=false -m regression      # Headless regression тесты
+pytest -n auto --headed=false                    # Maximum speed
+pytest -n 6 --headed=false                       # 6 workers, headless
+pytest -n auto --headed=false -m regression      # Headless regression tests
 ```
 
-**Остановка на первой ошибке:**
+**Stop on first failure:**
 ```bash
-pytest -x                        # Остановиться на первой ошибке
-pytest -n 4 -x                   # Параллельно с остановкой на ошибке
+pytest -x                        # Stop on first failure
+pytest -n 4 -x                   # Parallel, stop on failure
 ```
 
-### Полезные опции pytest
+### Useful pytest options
 
-**Отладка и вывод:**
+**Debugging and output:**
 ```bash
-pytest -v                        # Подробный вывод
-pytest -s                        # Показывать print() в консоли
-pytest -l                        # Показывать локальные переменные при ошибках
-pytest -vv                       # Очень подробный вывод
+pytest -v                        # Verbose output
+pytest -s                        # Show print() in console
+pytest -l                        # Show local variables on failure
+pytest -vv                       # Very verbose output
 ```
 
-**Управление выполнением:**
+**Execution control:**
 ```bash
-pytest -x                        # Остановиться на первой ошибке
-pytest --maxfail=3               # Остановиться после 3 ошибок
-pytest --lf                      # Запустить только упавшие тесты
-pytest --ff                      # Сначала упавшие, потом остальные
+pytest -x                        # Stop on first failure
+pytest --maxfail=3               # Stop after 3 failures
+pytest --lf                      # Run only failed tests
+pytest --ff                      # Failed first, then the rest
 ```
 
-**Комбинированные команды:**
+**Combined commands:**
 ```bash
-# Smoke-тесты в headless режиме с многопоточностью и Allure
+# Smoke tests in headless mode, multi-threaded, with Allure
 pytest -n auto --headed=false -m smoke --alluredir=allure-results
 
-# Regression-тесты с 6 потоками и Allure
+# Regression tests with 6 workers and Allure
 pytest -n 6 -m regression --alluredir=allure-results
 
-# Быстрая проверка с остановкой на первой ошибке
+# Quick check, stop on first failure
 pytest -n auto --headed=false -x -m smoke
 
-# Подробный вывод с локальными переменными
+# Verbose output with local variables
 pytest -vv -l tests/test_login.py
 ```
 
-### Выбор браузера
+### Browser selection
 
-**Запуск в Firefox:**
+**Run in Firefox:**
 ```bash
 pytest --browser firefox
 ```
 
-**Запуск в Safari:**
+**Run in Safari:**
 ```bash
 pytest --browser webkit
 ```
 
-**Запуск во всех браузерах:**
+**Run in all browsers:**
 ```bash
 pytest --browser chromium --browser firefox --browser webkit
 ```
 
-## Отчеты
+## Reports
 
-### Allure отчет (рекомендуется) 🎯
+### Allure report (recommended) 🎯
 
-Проект полностью интегрирован с Allure Framework для создания красивых и информативных отчетов.
+The project is fully integrated with the Allure Framework for rich, informative reports.
 
-#### Установка Allure командной строки
+#### Install the Allure CLI
 
 **macOS:**
 ```bash
@@ -266,191 +266,191 @@ sudo apt-get install allure
 scoop install allure
 ```
 
-Или скачайте с [официального сайта](https://github.com/allure-framework/allure2/releases).
+Or download it from the [official site](https://github.com/allure-framework/allure2/releases).
 
-#### Команды для запуска с Allure
+#### Running with Allure
 
-**1. 🚀 Запуск всех тестов параллельно с Allure (РЕКОМЕНДУЕТСЯ):**
+**1. 🚀 Run all tests in parallel with Allure (RECOMMENDED):**
 ```bash
 pytest -n auto --alluredir=allure-results
 pytest -n 8 --alluredir=allure-results
 ```
 
-**2. 🚀 Быстрый headless запуск (без GUI, максимальная скорость):**
+**2. 🚀 Fast headless run (no GUI, maximum speed):**
 ```bash
 pytest -n auto --headed=false --alluredir=allure-results
 pytest -n 8 --headed=false --alluredir=allure-results
 ```
 
-**3. Запуск smoke тестов с Allure (многопоточно):**
+**3. Run smoke tests with Allure (multi-threaded):**
 ```bash
 pytest -n auto -m smoke --alluredir=allure-results
 pytest -n 4 -m smoke --alluredir=allure-results
 ```
 
-**4. Запуск regression тестов с Allure (многопоточно):**
+**4. Run regression tests with Allure (multi-threaded):**
 ```bash
 pytest -n auto -m regression --alluredir=allure-results
 pytest -n 6 -m regression --alluredir=allure-results
 ```
 
-**5. Последовательный запуск с Allure (для отладки):**
+**5. Sequential run with Allure (for debugging):**
 ```bash
 pytest --alluredir=allure-results
 ```
 
-**6. Просмотр отчета:**
+**6. View the report:**
 ```bash
 allure serve allure-results
 ```
 
-#### Ручной запуск с Allure
+#### Manual run with Allure
 
-**Запуск тестов и генерация результатов:**
+**Run tests and generate results:**
 ```bash
 pytest --alluredir=allure-results
 ```
 
-**Просмотр отчета (запускает локальный сервер):**
+**View the report (starts a local server):**
 ```bash
 allure serve allure-results
 ```
 
-**Генерация статического HTML отчета:**
+**Generate a static HTML report:**
 ```bash
 allure generate allure-results -o allure-report --clean
 ```
 
-**Открытие сгенерированного отчета:**
+**Open the generated report:**
 ```bash
 allure open allure-report
 ```
 
-#### Особенности Allure отчетов в проекте
+#### Allure report features in this project
 
-✅ **Автоматические скриншоты** - при падении теста скриншот автоматически прикрепляется к отчету  
-✅ **Структурированные шаги** - каждое действие в тесте оформлено как отдельный шаг  
-✅ **Категории и метки** - тесты организованы по Epic, Feature и Story  
-✅ **Уровни критичности** - каждый тест имеет severity level (blocker, critical, normal, minor)  
-✅ **История запусков** - отслеживание стабильности тестов между запусками  
+✅ **Automatic screenshots** - on test failure, a screenshot is automatically attached to the report
+✅ **Structured steps** - every action in a test is a separate step
+✅ **Categories and labels** - tests are organized by Epic, Feature and Story
+✅ **Severity levels** - every test has a severity level (blocker, critical, normal, minor)
+✅ **Run history** - tracking test stability across runs
 
-#### Организация тестов в отчете
+#### Test organization in the report
 
 - **Epic**: "E-commerce"
-- **Features**: "Авторизация", "Корзина", "Каталог товаров", "Оформление заказа"
-- **Stories**: Конкретные пользовательские сценарии
+- **Features**: "Login", "Cart", "Product catalog", "Checkout"
+- **Stories**: specific user scenarios
 - **Severities**: Blocker, Critical, Normal, Minor
 
-### HTML отчет (pytest-html)
+### HTML report (pytest-html)
 
-**Генерация HTML отчета:**
+**Generate an HTML report:**
 ```bash
 pytest --html=report.html --self-contained-html
 ```
 
-Отчет будет сохранен в файле `report.html` в корне проекта.
+The report is saved to `report.html` in the project root.
 
-### Скриншоты
+### Screenshots
 
-При падении любого теста автоматически создается скриншот в двух местах:
+On any test failure, a screenshot is automatically saved in two places:
 
-1. **Локально** в директории `screenshots/` с названием: `{test_name}_{timestamp}.png`
-2. **В Allure отчете** - автоматически прикрепляется к упавшему тесту
+1. **Locally** in the `screenshots/` directory, named `{test_name}_{timestamp}.png`
+2. **In the Allure report** - automatically attached to the failed test
 
-## Маркеры тестов
+## Test markers
 
-| Маркер | Описание | Количество тестов |
+| Marker | Description | Number of tests |
 |--------|----------|-------------------|
-| `smoke` | Быстрые smoke тесты для проверки основного функционала | ~10 тестов |
-| `regression` | Полный набор regression тестов | ~20 тестов |
-| `login` | Тесты авторизации | 6 тестов |
-| `inventory` | Тесты каталога товаров | 10 тестов |
-| `cart` | Тесты корзины | 8 тестов |
-| `checkout` | Тесты оформления заказа | 9 тестов |
+| `smoke` | Fast smoke tests for core functionality | ~10 tests |
+| `regression` | Full regression suite | ~20 tests |
+| `login` | Login tests | 6 tests |
+| `inventory` | Product catalog tests | 10 tests |
+| `cart` | Cart tests | 8 tests |
+| `checkout` | Checkout tests | 9 tests |
 
-## Тестовые сценарии
+## Test scenarios
 
-### Тесты авторизации (test_login.py)
+### Login tests (test_login.py)
 
-1. Успешная авторизация с валидными данными
-2. Попытка входа с заблокированным пользователем
-3. Вход с невалидными данными (параметризованный тест)
-4. Попытка входа с пустым username
-5. Попытка входа с пустым password
-6. Проверка наличия всех элементов на странице логина
+1. Successful login with valid credentials
+2. Login attempt with a locked-out user
+3. Login with invalid data (parameterized test)
+4. Login attempt with empty username
+5. Login attempt with empty password
+6. All elements are present on the login page
 
-### Тесты каталога товаров (test_inventory.py)
+### Product catalog tests (test_inventory.py)
 
-1. Проверка отображения всех товаров (6 товаров)
-2. Добавление одного товара в корзину
-3. Добавление нескольких товаров в корзину
-4. Удаление товара из корзины на странице каталога
-5. Сортировка товаров по имени (A to Z)
-6. Сортировка товаров по имени (Z to A)
-7. Сортировка товаров по цене (low to high)
-8. Сортировка товаров по цене (high to low)
-9. Обновление счетчика корзины при добавлении/удалении товаров
-10. Переход в корзину
+1. All products are displayed (6 products)
+2. Add one product to the cart
+3. Add several products to the cart
+4. Remove a product from the cart on the catalog page
+5. Sort products by name (A to Z)
+6. Sort products by name (Z to A)
+7. Sort products by price (low to high)
+8. Sort products by price (high to low)
+9. Cart counter updates when adding/removing products
+10. Navigate to the cart
 
-### Тесты корзины (test_cart.py)
+### Cart tests (test_cart.py)
 
-1. Просмотр товаров в корзине
-2. Просмотр нескольких товаров в корзине
-3. Удаление товара из корзины
-4. Удаление одного из нескольких товаров
-5. Возврат к покупкам из корзины
-6. Проверка пустой корзины
-7. Проверка цен товаров в корзине
-8. Переход к оформлению заказа
+1. View products in the cart
+2. View several products in the cart
+3. Remove a product from the cart
+4. Remove one of several products
+5. Continue shopping from the cart
+6. Empty cart check
+7. Product prices in the cart
+8. Proceed to checkout
 
-### Тесты оформления заказа (test_checkout.py)
+### Checkout tests (test_checkout.py)
 
-1. Полный цикл покупки (E2E тест)
-2. Валидация формы - пустое имя
-3. Валидация формы - пустая фамилия
-4. Валидация формы - пустой почтовый индекс
-5. Отмена оформления заказа на первом шаге
-6. Проверка правильности расчета итоговой суммы
-7. Проверка количества товаров в обзоре заказа
-8. Возврат на страницу каталога после завершения заказа
+1. Full purchase flow (E2E test)
+2. Form validation - empty first name
+3. Form validation - empty last name
+4. Form validation - empty postal code
+5. Cancel checkout at the first step
+6. Order total is calculated correctly
+7. Number of items in the order overview
+8. Return to the catalog after completing an order
 
-## Тестовые пользователи
+## Test users
 
 ```python
-standard_user / secret_sauce       # Стандартный пользователь
-locked_out_user / secret_sauce     # Заблокированный пользователь
-problem_user / secret_sauce        # Пользователь с багами в UI
-performance_glitch_user / secret_sauce  # Пользователь с задержками
+standard_user / secret_sauce       # Standard user
+locked_out_user / secret_sauce     # Locked-out user
+problem_user / secret_sauce        # User with UI bugs
+performance_glitch_user / secret_sauce  # User with performance delays
 ```
 
-## Дополнительные команды
+## Additional commands
 
-**Проверка версии Playwright:**
+**Check the Playwright version:**
 ```bash
 playwright --version
 ```
 
-**Просмотр установленных браузеров:**
+**List installed browsers:**
 ```bash
 playwright show-browsers
 ```
 
-**Обновление зависимостей:**
+**Update dependencies:**
 ```bash
 pip install --upgrade -r requirements.txt
 ```
 
-## Полезные ссылки
+## Useful links
 
 - [Playwright Documentation](https://playwright.dev/python/)
 - [Pytest Documentation](https://docs.pytest.org/)
 - [Allure Documentation](https://docs.qameta.io/allure/)
 - [SauceDemo Test Site](https://www.saucedemo.com/)
 
-## Автор
+## Author
 
-Проект создан как пример полноценного UI тестового фреймворка с использованием современных инструментов и best practices.
+The project was created as an example of a full-featured UI test framework using modern tools and best practices.
 
-## Лицензия
+## License
 
-Этот проект создан в образовательных целях.
+This project was created for educational purposes.
