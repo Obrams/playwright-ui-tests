@@ -6,6 +6,7 @@ from typing import List
 class CartPage(BasePage):
     
     CART_ITEMS = ".cart_item"
+    CART_LIST = ".cart_list"
     CART_ITEM_NAMES = ".inventory_item_name"
     CART_ITEM_PRICES = ".inventory_item_price"
     CHECKOUT_BUTTON = "#checkout"
@@ -17,6 +18,8 @@ class CartPage(BasePage):
         super().__init__(page)
     
     def get_cart_items_count(self) -> int:
+        # the list container is rendered even for an empty cart; wait for it before counting
+        self.wait_for_element(self.CART_LIST)
         return self.get_element_count(self.CART_ITEMS)
     
     def get_cart_item_names(self) -> List[str]:
