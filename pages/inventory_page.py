@@ -18,6 +18,8 @@ class InventoryPage(BasePage):
         super().__init__(page)
     
     def get_products_count(self):
+        # locator.count() does not wait, so make sure the list has rendered first
+        self.wait_for_element(self.PRODUCT_ITEMS)
         return self.get_element_count(self.PRODUCT_ITEMS)
     
     def add_product_to_cart(self, product_name):
